@@ -245,3 +245,105 @@ async def see_terms(client, callback_query):
     await callback_query.message.edit_text(terms_text, reply_markup=buttons)
  
  
+
+@app.on_message(filters.command("helpp") & filters.private)
+async def plan(client, message):
+    plan_text = (
+        "📝 **Bot Commands Overview (1/2)**:\n\n"
+        "1. **/add userID**\n"
+        "> Add user to premium (Owner only)\n\n"
+        "2. **/rem userID**\n"
+        "> Remove user from premium (Owner only)\n\n"
+        "3. **/transfer userID**\n"
+        "> Transfer premium to your beloved major purpose for resellers (Premium members only)\n\n"
+        "4. **/get**\n"
+        "> Get all user IDs (Owner only)\n\n"
+        "5. **/lock**\n"
+        "> Lock channel from extraction (Owner only)\n\n"
+        "6. **/dl link**\n"
+        "> Download videos (Not available in v3 if you are using)\n\n"
+        "7. **/adl link**\n"
+        "> Download audio (Not available in v3 if you are using)\n\n"
+        "8. **/login**\n"
+        "> Log into the bot for private channel access\n\n"
+        "9. **/batch**\n"
+        "> Bulk extraction for posts (After login)\n\n"
+    )
+     
+    buttons = InlineKeyboardMarkup(
+        [
+            [InlineKeyboardButton("Next ⏭️", callback_data="help_iind")]
+        ]
+    )
+    await message.reply_text(plan_text, reply_markup=buttons)
+
+
+@app.on_callback_query(filters.regex("help_ist"))
+async def see_terms(client, callback_query):
+    terms_text = (
+        "📝 **Bot Commands Overview (1/2)**:\n\n"
+        "1. **/add userID**\n"
+        "> Add user to premium (Owner only)\n\n"
+        "2. **/rem userID**\n"
+        "> Remove user from premium (Owner only)\n\n"
+        "3. **/transfer userID**\n"
+        "> Transfer premium to your beloved major purpose for resellers (Premium members only)\n\n"
+        "4. **/get**\n"
+        "> Get all user IDs (Owner only)\n\n"
+        "5. **/lock**\n"
+        "> Lock channel from extraction (Owner only)\n\n"
+        "6. **/dl link**\n"
+        "> Download videos (Not available in v3 if you are using)\n\n"
+        "7. **/adl link**\n"
+        "> Download audio (Not available in v3 if you are using)\n\n"
+        "8. **/login**\n"
+        "> Log into the bot for private channel access\n\n"
+        "9. **/batch**\n"
+        "> Bulk extraction for posts (After login)\n\n"
+    )
+     
+    buttons = InlineKeyboardMarkup(
+        [
+            [InlineKeyboardButton("Next ▶️", callback_data="help_iind")],
+            [InlineKeyboardButton("💬 Contact Now", url="https://t.me/kingofpatal")],
+        ]
+    )
+    await callback_query.message.edit_text(terms_text, reply_markup=buttons)
+
+
+@app.on_callback_query(filters.regex("help_iind"))
+async def see_terms(client, callback_query):
+    terms_text = (
+        "📝 **Bot Commands Overview (2/2)**:\n\n"
+        "10. **/logout**\n"
+        "> Logout from the bot\n\n"
+        "11. **/stats**\n"
+        "> Get bot stats\n\n"
+        "12. **/plan**\n"
+        "> Check premium plans\n\n"
+        "13. **/speedtest**\n"
+        "> Test the server speed (not available in v3)\n\n"
+        "14. **/terms**\n"
+        "> Terms and conditions\n\n"
+        "15. **/cancel**\n"
+        "> Cancel ongoing batch process\n\n"
+        "16. **/myplan**\n"
+        "> Get details about your plans\n\n"
+        "17. **/session**\n"
+        "> Generate Pyrogram V2 session\n\n"
+        "18. **/settings**\n"
+        "> 1. SETCHATID : To directly upload in channel or group or user's dm use it with -100[chatID]\n"
+        "> 2. SETRENAME : To add custom rename tag or username of your channels\n"
+        "> 3. CAPTION : To add custom caption\n"
+        "> 4. REPLACEWORDS : Can be used for words in deleted set via REMOVE WORDS\n"
+        "> 5. RESET : To set the things back to default\n\n"
+        "> You can set CUSTOM THUMBNAIL, PDF WATERMARK, VIDEO WATERMARK, SESSION-based login, etc. from settings\n\n"
+    )
+     
+    buttons = InlineKeyboardMarkup(
+        [
+            [InlineKeyboardButton("◀️ back", callback_data="help_ist")],
+            [InlineKeyboardButton("💬 Contact Now", url="https://t.me/kingofpatal")],
+        ]
+    )
+    await callback_query.message.edit_text(terms_text, reply_markup=buttons)
