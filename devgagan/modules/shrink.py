@@ -14,7 +14,7 @@
 # ---------------------------------------------------
 
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 import random
 import requests
 import string
@@ -74,8 +74,8 @@ async def token_handler(client, message):
     user_id = message.chat.id
     if len(message.command) <= 1:
         image_url = "https://i.postimg.cc/v8q8kGyz/startimg-1.jpg"
-        join_button = InlineKeyboardButton("Join Channel", url="https://t.me/team_spy_pro")
-        premium = InlineKeyboardButton("Get Premium", url="https://t.me/kingofpatal")   
+        join_button = InlineKeyboardButton("𝐉𝐨𝐢𝐧 𝐌𝐚𝐢𝐧 𝐂𝐡𝐚𝐧𝐧𝐞𝐥", url="https://t.me/team_spy_pro")
+        premium = InlineKeyboardButton("help", callback_data="helper")   
         keyboard = InlineKeyboardMarkup([
             [join_button],   
             [premium]    
@@ -85,8 +85,10 @@ async def token_handler(client, message):
             msg.photo.file_id,
             caption=(
                 "Hi 👋 Welcome, Wanna intro...?\n\n"
-                "✳️ I can save posts from channels or groups where forwarding is off. I can download videos/audio from YT, INSTA, ... social platforms\n"
-                "✳️ Simply send the post link of a public channel. For private channels, do /login. Send /help to know more."
+                "➭ Sᴀᴠᴇ ᴘᴏꜱᴛꜱ ғʀᴏᴍ ᴄʜᴀɴɴᴇʟꜱ ᴀɴᴅ ɢʀᴏᴜᴘꜱ ᴡʜᴇʀᴇ ғᴏʀᴡᴀʀᴅɪɴɢ ɪꜱ ʀᴇꜱᴛʀɪᴄᴛᴇᴅ\n"
+                "➭ Eᴀꜱɪʟʏ ғᴇᴛᴄʜ ᴍᴇꜱꜱᴀɢᴇꜱ ғʀᴏᴍ ᴘᴜʙʟɪᴄ ᴄʜᴀɴɴᴇʟꜱ ʙʏ ꜱᴇɴᴅɪɴɢ ᴛʜᴇɪʀ ᴘᴏꜱᴛ ʟɪɴᴋꜱ\n"
+                "➭ Fᴏʀ ᴘʀɪᴠᴀᴛᴇ ᴄʜᴀɴɴᴇʟꜱ, ᴜꜱᴇ /login ᴛᴏ ᴀᴄᴄᴇꜱꜱ ᴄᴏɴᴛᴇɴᴛ ꜱᴇᴄᴜʀᴇʟʏ\n\n"
+                "📑 Fᴏʀ ᴍᴏʀᴇ ɪɴꜱᴛʀᴜᴄᴛɪᴏɴꜱ ꜱᴇɴᴅ /help"
             ),
             reply_markup=keyboard
         )
@@ -144,4 +146,39 @@ async def smart_handler(client, message):
             [[InlineKeyboardButton("Verify the token now...", url=shortened_url)]]
         )
         await message.reply("Click the button below to verify your free access token: \n\n> What will you get ? \n1. No time bound upto 3 hours \n2. Batch command limit will be FreeLimit + 20 \n3. All functions unlocked", reply_markup=button)
- 
+
+
+@app.on_callback_query(filters.regex("helper"))
+async def see_plan(client, callback_query):
+    plan_text = (
+        "> 📝 Bot Commands Overview:"
+        "> 1. /add userID - Add user to premium (Owner only)\n2. /rem userID - Remove user from premium (Owner only)\n3. /transfer userID - Transfer premium to another user\n4. /login - Log into the bot for private channel access\n5. /batch - Bulk extraction for posts (After login)\n6. /logout - Logout from the bot\n7. /stats - Get bot statistics\n8. /plan - Check premium plans\n9. /speedtest - Test the server speed\n10. /terms - Terms and conditions\n11. /cancel - Cancel ongoing batch process\n12. /myplan - Get details about your plans\n13. /session - Generate Pyrogram V2 session\n14. /settings - Personalize bot settings"
+        "Powered by Team SPY"
+    )
+
+    buttons = InlineKeyboardMarkup(
+        [
+            [InlineKeyboardButton("🏷️ back ", callback_data="home")],
+            [InlineKeyboardButton("💬 Contact Now", url="https://t.me/")],
+        ]
+    )
+    await callback_query.message.edit_text(plan_text, reply_markup=buttons)
+
+
+@app.on_callback_query(filters.regex("home"))
+async def see_plan(client, callback_query):
+    plan_text = (
+        "Hi 👋 Welcome, Wanna intro...?\n\n"
+                "➭ Sᴀᴠᴇ ᴘᴏꜱᴛꜱ ғʀᴏᴍ ᴄʜᴀɴɴᴇʟꜱ ᴀɴᴅ ɢʀᴏᴜᴘꜱ ᴡʜᴇʀᴇ ғᴏʀᴡᴀʀᴅɪɴɢ ɪꜱ ʀᴇꜱᴛʀɪᴄᴛᴇᴅ\n"
+                "➭ Eᴀꜱɪʟʏ ғᴇᴛᴄʜ ᴍᴇꜱꜱᴀɢᴇꜱ ғʀᴏᴍ ᴘᴜʙʟɪᴄ ᴄʜᴀɴɴᴇʟꜱ ʙʏ ꜱᴇɴᴅɪɴɢ ᴛʜᴇɪʀ ᴘᴏꜱᴛ ʟɪɴᴋꜱ\n"
+                "➭ Fᴏʀ ᴘʀɪᴠᴀᴛᴇ ᴄʜᴀɴɴᴇʟꜱ, ᴜꜱᴇ /login ᴛᴏ ᴀᴄᴄᴇꜱꜱ ᴄᴏɴᴛᴇɴᴛ ꜱᴇᴄᴜʀᴇʟʏ\n\n"
+                "📑 Fᴏʀ ᴍᴏʀᴇ ɪɴꜱᴛʀᴜᴄᴛɪᴏɴꜱ ꜱᴇɴᴅ /help"
+    )
+
+    buttons = InlineKeyboardMarkup(
+        [
+            [InlineKeyboardButton("🏷️ back ", callback_data="home")],
+            [InlineKeyboardButton("💬 Contact Now", url="https://t.me/")],
+        ]
+    )
+    await callback_query.message.edit_text(plan_text, reply_markup=buttons)
